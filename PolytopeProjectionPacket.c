@@ -81,7 +81,7 @@ void mexFunction(
 void projection2(double *uPointer, double *resPointer, int length) {
 	double z[length];
 	double *zPointer = &z[0];
-	projectionIntoBinarySubspace(uPointer, zPointer, length);
+	projectionIntoBinarySubspace(uPointer, zPointer, length); // L2
 	
 	double v[length];
 	for (int i = 0; i < length; i++) {
@@ -132,7 +132,7 @@ void projection2(double *uPointer, double *resPointer, int length) {
 	for (int i = 0; i < length; i++) {
 		if (tau[i]<0) t[k++]=-tau[i];
 	}
-	selection_sort(t, tLength);
+	selection_sort(t, tLength); // L17
 	double tauBin[length];
 	double *tauBinPointer = &tauBin[0];
 	projectionIntoBinarySubspace(tauPointer, tauBinPointer, length);
@@ -158,12 +158,12 @@ void projection2(double *uPointer, double *resPointer, int length) {
 		uu[i] = *(uPointer+i) - lambda*(2*v[i]-1);
 	}
 	
-	projectionIntoBinarySubspace(uuPointer, resPointer, length);
+	projectionIntoBinarySubspace(uuPointer, resPointer, length); // L46
 	
 }
 
 //utility
-double absoluteNorm(double *pointer, int length) {
+double absoluteNorm(double *pointer, int length) { // sum(abs(x))
 	double sum = 0;
 	for (int i = 0; i < length; i++) {
 		double *currentPointer = pointer+i;
@@ -172,7 +172,7 @@ double absoluteNorm(double *pointer, int length) {
 	return sum;
 }
 
-void projectionIntoBinarySubspace(double *pointer, double *outputPointer, int length) {
+void projectionIntoBinarySubspace(double *pointer, double *outputPointer, int length) { // outputPointer = clip(pointer,0,1)
 	double *currentPointer;
 	for (int i = 0; i < length; i=i+1) {
 		currentPointer = pointer+i;
