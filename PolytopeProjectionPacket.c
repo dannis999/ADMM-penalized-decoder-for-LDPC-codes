@@ -182,17 +182,17 @@ void projectionIntoBinarySubspace(double *pointer, double *outputPointer, int le
 	}
 }
 
-double projectionIntoBinary(double value) {
+double projectionIntoBinary(double value) { // clip(value,0,1)
 	if (value > 1) value = 1;
 	if (value < 0) value = 0;
 	return value; 
 }
 
-double absolute(double value) {
+double absolute(double value) { // abs(value)
 	return value<0 ? -value : value;
 }
 
-void selection_sort(double v[],int nmax){
+void selection_sort(double v[],int nmax){ // sort(v,nmax=len(v))
     int i,j,min;
     double t;
     
@@ -216,7 +216,10 @@ void selection_sort(double v[],int nmax){
 }
 
 void multiplyMatrix(double *pointerA, double *pointerB, double *pointerC, int ma, int na, int mb, int nb) {
-	
+	// mat pointerA, size=(ma,na)
+	// mat pointerB, size=(mb,nb), mb=na
+	// mat pointerC, size=(nb,ma)
+	// C = (A B)^T
 	if (nb==1) {
 		for (int i = 0; i < ma; i++) {
 		for (int j = 0; j < nb; j++) {

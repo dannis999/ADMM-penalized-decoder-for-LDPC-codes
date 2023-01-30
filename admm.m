@@ -5,7 +5,7 @@ numElem = nnz(H);
 
 %param
 mu = 3;
-alpha = 0.8;
+alpha = 0.8; % gamma?
 
 % init
 x = zeros(n,1);
